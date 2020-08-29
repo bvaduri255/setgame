@@ -3,12 +3,16 @@ import os
 import numpy as np
 import imutils
 import random
+from sklearn.cluster import KMeans
+from collections import Counter
+from skimage.color import rgb2lab, deltaE_cie76
 from matplotlib import pyplot as plt
 
 img = cv.imread('imgs/img3.png')
-
+img_color = cv.imread('tempimgs/Slice4.png')
 window_name = 'Image'
 image_shape = img.shape
+print(image_shape)
 card_num = 0
 if image_shape[0] < 700:
     card_num = 12
@@ -25,6 +29,23 @@ else:
 
 print(card_num)
 
+def color(img,x,y):
+    out = img[y,x]
+
+    return out
+thingy = color(img_color,97,33)
+print(thingy)
+thingy = thingy.tolist()
+print(thingy)
+print(type(thingy))
+
+def RGB2HEX(color):
+    return "#{:02x}{:02x}{:02x}".format(int(color[0]), int(color[1]), int(color[2]))
+
+def get_image(image_path):
+    image = cv2.imread(image_path)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    return image
 
 def splitter(image):
     name = 'Slice'
@@ -162,7 +183,7 @@ def card_to_vect(i):
     return max_ind
     #return card_vect_list
 
-
+'''
 splitter(img)
 make_card_dict()
-print(card_to_vect(1))
+print(card_to_vect(1))'''
